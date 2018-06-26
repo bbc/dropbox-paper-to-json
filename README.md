@@ -47,19 +47,31 @@ DROPBOX_DOC_ID=vJdrjMJAHdgfHz0rl83Z
 
 ### In development 
 
-- `git clone` this repo 
-- `cd` into folder
-- `npm install`
-- `npm start` <!-- TODO: perhaps add take dropbox access code and doc id as input and move into test -->
+clone this repo 
+```
+git clone git@github.com:bbc/dropbox-paper-to-json.git
+```
+
+cd into folder 
+
+```
+cd dropbox-paper-to-json
+```
+
+`npm install`
+
+`npm start` 
+
+This will save a `data.json` file in the root of the project.
 
 ### In production 
 
-npm install `...`  <!-- link to github repo -->
+npm install `npm install github:bbc/ws-crossing-divides-datacleaner`
 
 Add to your code base 
 
 ```js
-const dbpMdToJson = require('./index.js')
+const dbpMdToJson = require('dropbox-paper-to-json/dpbToJson.js')
 
 dbpMdToJson({
     accessToken: process.env.DROPBOX_ACCESS_TOKEN,
@@ -228,6 +240,7 @@ see [`md-to-json/examples/test.md`](./md-to-json/examples/test.md) as an example
 - [ ]  Parsing markdown github flavour tags for links eg `[text](link url)` these generally appear as part of a paragraph, but could also appear in their own line, or as part of a heading etc..
 
 <!-- 
+Some research link 
 
 - [Dropbox for JavaScript Developers](https://www.dropbox.com/developers/documentation/javascript#overview)
 - [Dropbox JavaScript SDK](http://dropbox.github.io/dropbox-sdk-js/index.html)
@@ -235,18 +248,12 @@ see [`md-to-json/examples/test.md`](./md-to-json/examples/test.md) as an example
 
 - [File request](https://www.dropbox.com/help/files-folders/received-file-request)
 
-
-
 - [dropbox-paper](https://www.npmjs.com/package/dropbox-paper#download-doc) 
-
 
 - [Markdown to JSON converter - python](https://github.com/njvack/markdown-to-json)
 - [`json2md`](https://github.com/IonicaBizau/json2md)
 
-
 -[`md-2-json`](https://www.npmjs.com/package/md-2-json)
-
-
 
 - [`marked`](https://www.npmjs.com/package/marked)
 
