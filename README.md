@@ -66,7 +66,11 @@ This will save a `data.json` file in the root of the project.
 
 ### In production 
 
-npm install `npm install github:bbc/ws-crossing-divides-datacleaner`
+npm install 
+
+```
+npm install github:bbc/ws-crossing-divides-datacleaner
+```
 
 Add to your code base 
 
@@ -104,7 +108,7 @@ the submodule [`md-to-json/linear.js`](./md-to-json/linear.js) takes the content
 
 it's a flat data structure, with no nesting, hence why sometimes refered to as linear.
 
-#### example
+#### Example "linear json"
 
 ```json
 [
@@ -140,7 +144,7 @@ _NOTE_ dropbox paper flavour of markdown only properly reppresents `H1` and `H2`
 
 This is done in [`md-to-json/index.js`](./md-to-json/index.j)
 
-#### Example
+#### Example "nested json"
 
 ```json 
 {
