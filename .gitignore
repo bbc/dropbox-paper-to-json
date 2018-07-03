@@ -49,6 +49,7 @@ notes/
 
 # This is what the module returns, and could cause merge conflicts if commited.
 data.json
+data.txt
 
 # enviroment variables
 .env

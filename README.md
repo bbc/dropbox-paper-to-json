@@ -98,13 +98,13 @@ dbpMdToJson({
 _High level overview of system architecture_
 
 ### Downloading a Dropbox paper 
-The module uses the unofficial [`dropbox-paper`](https://www.npmjs.com/package/dropbox-paper) node module sdk to get a markdown version of a dropbox paper given a dropbox paper id. 
+The module uses [`dpb-download-md`](./dpb-download-md/index.js) node module to get a dropbox paper as markdown given a dropbox paper id and access token. 
 
 As the official SDK didn't seem to have a straightforward way to get to a dropbox paper document content.
   
 ### Converting markdown dropbox paper to "linear" json 
 
-the submodule [`md-to-json/linear.js`](./md-to-json/linear.js) takes the content of a markdown file as a string and converts it into an array of objects, representing markdown elements.
+The submodule [`md-to-json/linear.js`](./md-to-json/linear.js) takes the content of a markdown file as a string and converts it into an array of objects, representing markdown elements.
 
 it's a flat data structure, with no nesting, hence why sometimes refered to as linear.
 
@@ -239,7 +239,7 @@ see [`md-to-json/examples/test.md`](./md-to-json/examples/test.md) as an example
 
 ### Markdown elements that could be included in module
 - [X] Parsing markdown github flavour tags for images eg `![alt text](link url)`. These appear on their own line.
-   - _NOTE_ luckily even when displaied on the same line in dropbox paper, the images are still represented on individual lines when exported as markdown. Which makes it easier to identify as separate from other elements and parse. 
+   - _NOTE_ luckily even when displayed on the same line in dropbox paper, the images are still represented on individual lines when exported as markdown. Which makes it easier to identify as separate from other elements and parse. 
 
 - [ ]  Parsing markdown github flavour tags for links eg `[text](link url)` these generally appear as part of a paragraph, but could also appear in their own line, or as part of a heading etc..
 
