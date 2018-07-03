@@ -98,13 +98,13 @@ dbpMdToJson({
 _High level overview of system architecture_
 
 ### Downloading a Dropbox paper 
-The module uses the unofficial [`dropbox-paper`](https://www.npmjs.com/package/dropbox-paper) node module sdk to get a markdown version of a dropbox paper given a dropbox paper id. 
+The module uses [`dpb-download-md`](./dpb-download-md/index.js) node module to get a dropbox paper as markdown given a dropbox paper id and access token. 
 
 As the official SDK didn't seem to have a straightforward way to get to a dropbox paper document content.
   
 ### Converting markdown dropbox paper to "linear" json 
 
-the submodule [`md-to-json/linear.js`](./md-to-json/linear.js) takes the content of a markdown file as a string and converts it into an array of objects, representing markdown elements.
+The submodule [`md-to-json/linear.js`](./md-to-json/linear.js) takes the content of a markdown file as a string and converts it into an array of objects, representing markdown elements.
 
 it's a flat data structure, with no nesting, hence why sometimes refered to as linear.
 
