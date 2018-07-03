@@ -16,32 +16,32 @@ function mdToNestedJson(markdownFilecontent){
     var mdJson = mdToJson(markdownFilecontent);
 
     var nestedMdJson = [];
-    var currentElementTytpe;
+    var currentElementType;
 
     var titleElement = mdJson.shift();
 
     mdJson.forEach((el)=>{
         // TODO: consider edge case, eg there's an H2 not preceeded by an H1?
         if(el.type == 'h1'){
-            currentElementTytpe = 'h1';
+            currentElementType = 'h1';
             // add elements attribute for sibblings elements
             el.elements = [];
             addElementToNestedJsonArray(el,nestedMdJson);
         }
         // nesting H2 inside H1
         else if(el.type == 'h2'){
-            currentElementTytpe = 'h2';
+            currentElementType = 'h2';
             // add elements attribute for sibblings elements
             el.elements = [];
-            addElementToLastH1Sibling(el,nestedMdJson);
+            addElementToLastH1Sibling(el, nestedMdJson);
         }
         // nest all other elements inside h1, h2, or a 'root' level. 
         else{
-            if( currentElementTytpe == 'h1'){
+            if( currentElementType == 'h1'){
                 addElementToLastH1Sibling(el,nestedMdJson);
             } 
-            else if( currentElementTytpe == 'h2'){
-                addElementToLastH2Sibling(el,nestedMdJson);
+            else if( currentElementType == 'h2'){
+                addElementToLastH2Sibling(el, nestedMdJson);
             }
             // this is to deal with edge case where there's text between title and first H1 tag in document.
             else {
@@ -60,7 +60,6 @@ function mdToNestedJson(markdownFilecontent){
 
     return titleElement;
 }
-
 
 /**
  * Helper functions

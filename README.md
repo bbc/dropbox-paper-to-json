@@ -239,7 +239,7 @@ see [`md-to-json/examples/test.md`](./md-to-json/examples/test.md) as an example
 
 ### Markdown elements that could be included in module
 - [X] Parsing markdown github flavour tags for images eg `![alt text](link url)`. These appear on their own line.
-   - _NOTE_ luckily even when displaied on the same line in dropbox paper, the images are still represented on individual lines when exported as markdown. Which makes it easier to identify as separate from other elements and parse. 
+   - _NOTE_ luckily even when displayed on the same line in dropbox paper, the images are still represented on individual lines when exported as markdown. Which makes it easier to identify as separate from other elements and parse. 
 
 - [ ]  Parsing markdown github flavour tags for links eg `[text](link url)` these generally appear as part of a paragraph, but could also appear in their own line, or as part of a heading etc..
 

@@ -11,10 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^6.0.0",
-    "dropbox": "^4.0.7",
-    "dropbox-paper": "^1.1.1",
-    "isomorphic-fetch": "^2.2.1",
-    "jest": "^23.1.0"
+    "jest": "^23.1.0",
+    "request": "^2.87.0"
   },
   "devDependencies": {
     "eslint": "^5.0.1",

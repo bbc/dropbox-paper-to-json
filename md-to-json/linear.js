@@ -27,17 +27,20 @@ function makeJson (content){
         // NOTE: H2 needs to be tested for before h1 otherwise it will mistake h2 as h1.
         if(isH2(line)){
             contentJson.push(makeHeadingElement(line, 'h2'));
-            // console.log(line)
         }
         else if(isH1(line)){
             contentJson.push(makeHeadingElement(line, 'h1'));
-            // console.log(line)
+            
         }
         else if(isImg(line)){
+            // console.log(line);
             contentJson.push(makeImageElement(line));
         }
         else if(isLinkUrl(line)){
             contentJson.push(makeLinkElement(line));
+        }
+        else if(isQuote(line)){
+            contentJson.push(makeQuoteElement(line));
         }
         // assuming that if it's not an empty line then it's a regular paragraph
         // TODO: add a test for paragraph?
@@ -47,7 +50,7 @@ function makeJson (content){
             }
         }
     });
-
+    // console.log(contentJson);
     return contentJson;
 }
 
@@ -103,6 +106,10 @@ function isImg(text){
     return isMdElement(text, '![');
  }
 
+ function isQuote(text){
+    return isMdElement(text, '> ');
+ }
+
 /**
  * 
  * @param {string} text the markdown string, eg `## some heading 2 text`
@@ -150,6 +157,10 @@ function makeImageElement(mdImgString){
         imgUrl = imgUrl.split(']')[0];
         
     return {url: imgUrl, text: altText, type: 'img'};
+}
+
+function makeQuoteElement(text){
+    return {text: text.split('> ')[1].trim(), type: 'quote'};
 }
 
 /**
