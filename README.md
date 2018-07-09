@@ -75,7 +75,7 @@ npm install github:bbc/ws-crossing-divides-datacleaner
 Add to your code base 
 
 ```js
-const dbpMdToJson = require('dropbox-paper-to-json/dpbToJson.js')
+const dbpMdToJson = require('dropbox-paper-to-json');
 
 dbpMdToJson({
     accessToken: process.env.DROPBOX_ACCESS_TOKEN,
