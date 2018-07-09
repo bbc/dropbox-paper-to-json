@@ -69,7 +69,7 @@ This will save a `data.json` file in the root of the project.
 npm install 
 
 ```
-npm install github:bbc/dropbox-paper-to-json
+npm install dropbox-paper-to-json@git+ssh://git@github.com/bbc/dropbox-paper-to-json.git#master -save
 ```
 
 Add to your code base 
