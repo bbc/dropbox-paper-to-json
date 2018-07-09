@@ -69,7 +69,7 @@ This will save a `data.json` file in the root of the project.
 npm install 
 
 ```
-npm install github:bbc/ws-crossing-divides-datacleaner
+npm install github:bbc/dropbox-paper-to-json
 ```
 
 Add to your code base 
