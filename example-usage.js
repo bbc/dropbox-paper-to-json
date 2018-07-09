@@ -1,3 +1,4 @@
+const fs = require('fs');
 const dbpMdToJson = require('./index');
 
 dbpMdToJson({
@@ -5,8 +6,8 @@ dbpMdToJson({
     dbp_doc_id: process.env.DROPBOX_DOC_ID,
     // default for nested === true
     nested: true,
-    jsonDestFileName: './data.json',
-    cb: function(dest) {
-        console.log(`done Dropbox Paper to json conversion in: ${dest}`);
+    cb: function(data) {
+        console.log('done Dropbox Paper to json conversion');
+        fs.writeFileSync('./data.json',JSON.stringify(data, null, 2));
     }
 });

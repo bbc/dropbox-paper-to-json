@@ -1,5 +1,5 @@
 require('dotenv').config();
-const fs = require('fs');
+
 const downloadDpbMd = require('./dbp-download-md/index.js');
 const mdToNestedJson = require('./md-to-json/index.js');
 const mdToJson = require('./md-to-json/linear.js');
@@ -14,7 +14,7 @@ function dbpMdToJson(options) {
         } else {
             nested = options.nested;
         }
-
+        
         var jsonResult;
         if (nested) {
             // convert to nested json
@@ -23,17 +23,9 @@ function dbpMdToJson(options) {
             // convert to linear json
             jsonResult = mdToJson(mdData);
         }
-        // write output json file ?
-        fs.writeFileSync(
-            options.jsonDestFileName,
-            JSON.stringify(jsonResult, null, 2)
-        );
-
-        // save the markdown for troubleshooting
-        // fs.writeFileSync('data.txt', mdData);
-
+        // return output json 
         if (options.cb) {
-            options.cb(options.jsonDestFileName);
+            options.cb(jsonResult);
         }
     });
 }

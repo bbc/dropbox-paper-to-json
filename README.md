@@ -77,22 +77,23 @@ Add to your code base
 ```js
 //if using dotenv for environment variable credentials for dropbox paper
 require('dotenv').config();
+// optional if you want to write the resulting json
+const fs = require('fs');
 // require module
 const dbpMdToJson = require('dropbox-paper-to-json');
 
 dbpMdToJson({
     accessToken: process.env.DROPBOX_ACCESS_TOKEN,
-    dbp_doc_id:  process.env.DROPBOX_DOC_ID,
+    dbp_doc_id: process.env.DROPBOX_DOC_ID,
     // default for nested === true
     nested: true,
-    jsonDestFileName: './data.json',
-    // callback, triggered when done processing, is optional
-    cb: callback
- });
+    cb: function(data) {
+        console.log(`done Dropbox Paper to json conversion`);
+        // optional do something with the data 
+        fs.writeFileSync(JSON.stringify('./data.json',data, null, 2));
+    }
+});
 
- function callback(dest){
-   console.log(`done Dropbox Paper to json conversion in: ${dest}`
- });
 ```
  
 
