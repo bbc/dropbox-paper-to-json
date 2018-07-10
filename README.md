@@ -18,12 +18,11 @@ A Node module to import data from a dropbox paper document and convert it into a
 #### Create a dropbox App
 
 - `create app` [from developer console](https://www.dropbox.com/developers/apps)
-- chose `Dropbox API`
-- chose `Full Dropbox`
-
-- give it a Name: eg `News Mixer`
-- click on the newly created app 
-- and [Generate an access token for your own account](https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/)
+ - chose `Dropbox API`
+ - chose `Full Dropbox`
+ - give it a Name: eg `News Mixer`
+  - click on the newly created app 
+   - and [Generate an access token for your own account](https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/)
 
 
 ### 2. get dropbox paper `document id`
