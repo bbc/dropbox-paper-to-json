@@ -149,6 +149,8 @@ function makeImageElement(mdImgString) {
     var imgUrl = altTextAndImgAr[1];
     // removing trailing close square braket from md syntax
     imgUrl = imgUrl.split(']')[0];
+    // removing trailing `)` from markdown image
+    imgUrl = imgUrl.split(')')[0];
 
     return { url: imgUrl, text: altText, type: 'img' };
 }
