@@ -12,30 +12,23 @@ const fetch = require('node-fetch');
  *
  */
 
-function downloadDpbMd(accessToken, dbpDocId, cb) {
+async function downloadDpbMd(accessToken, dbpDocId, cb) {
     const headers = {
         Authorization: `Bearer ${accessToken}`,
         'Dropbox-API-Arg': `{"doc_id": "${dbpDocId}","export_format": "markdown"}`
     };
 
-    return fetch('https://api.dropboxapi.com/2/paper/docs/download', {
+    const response = await fetch('https://api.dropboxapi.com/2/paper/docs/download', {
         method: 'POST',
         headers: headers
-    })
-        .then((response) => {
-            if (response.status === 200) {
-                return response.text();
-            }
-            return Promise.reject(
-                new Error('Dropbox Paper API returned the wrong status code')
-            );
-        })
-        .catch((error) => {
-            console.error(
-                'There was an error with the Dropbox Paper API response',
-                error
-            );
-        });
+    });
+
+    if (response.ok) {
+        return response.text();
+    }
+    return Promise.reject(
+        new Error(`Dropbox Paper API returned wrong status code: ${response.status}`)
+    );
 }
 
 module.exports = downloadDpbMd;
