@@ -3,7 +3,7 @@
 <!-- _One liner + link to confluence page_ -->
 
 A Node module to import data from a dropbox paper document and convert it into a json data structure.
- 
+
 
 ## Setup
 
@@ -21,7 +21,7 @@ A Node module to import data from a dropbox paper document and convert it into a
   - chose `Dropbox API`
   - chose `Full Dropbox`
   - give it a Name: eg `News Mixer`
-    - click on the newly created app 
+    - click on the newly created app
       - and [Generate an access token for your own account](https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/)
 
 
@@ -33,7 +33,7 @@ eg if the url of your dropbox paper is something like
 https://paper.dropbox.com/doc/Main-Title-vJdrjMJAHdgfHz0rl83Z
 ```
 
-Then the last string element after the last `-`, reading from left to right, is your document id. 
+Then the last string element after the last `-`, reading from left to right, is your document id.
 
 In this ficticious example it would be: `vJdrjMJAHdgfHz0rl83Z`.
 
@@ -46,22 +46,22 @@ In the root of the folder repo create a `.env` file, this is excluded from the g
 Here's an examples format of `.env` file, _with some fictitious credentials_
 
 ```
-# Dropbox credentials 
+# Dropbox credentials
 DROPBOX_ACCESS_TOKEN=vJdrjMJAHdgfHz0rl83ZvJdrjMJAHdgfHz0rl83Z
 DROPBOX_DOC_ID=vJdrjMJAHdgfHz0rl83Z
 ```
- 
+
 
 ## Usage
 
-### In development 
+### In development
 
-clone this repo 
+clone this repo
 ```
 git clone git@github.com:bbc/dropbox-paper-to-json.git
 ```
 
-cd into folder 
+cd into folder
 
 ```
 cd dropbox-paper-to-json
@@ -69,19 +69,19 @@ cd dropbox-paper-to-json
 
 `npm install`
 
-`npm start` 
+`npm start`
 
 This will save a `data.json` file in the root of the project.
 
-### In production 
+### In production
 
-npm install 
+npm install
 
 ```
 npm install dropbox-paper-to-json@git+ssh://git@github.com/bbc/dropbox-paper-to-json.git#master -save
 ```
 
-Add to your code base 
+Add to your code base
 
 ```js
 //if using dotenv for environment variable credentials for dropbox paper
@@ -95,27 +95,26 @@ dbpMdToJson({
     accessToken: process.env.DROPBOX_ACCESS_TOKEN,
     dbp_doc_id: process.env.DROPBOX_DOC_ID,
     // default for nested === true
-    nested: true,
-    cb: function(data) {
-        console.log(`done Dropbox Paper to json conversion`);
-        // optional do something with the data 
-        fs.writeFileSync(JSON.stringify('./data.json',data, null, 2));
-    }
+    nested: true
+}).then((data) => {
+    console.log(`done Dropbox Paper to JSON conversion`);
+    // optional: now do something with the data
+    fs.writeFileSync('./data.json', JSON.stringify(data, null, 2));
 });
 
 ```
- 
+
 
 ## System Architecture
 
 _High level overview of system architecture_
 
-### Downloading a Dropbox paper 
-The module uses [`dpb-download-md`](./dpb-download-md/index.js) node module to get a dropbox paper as markdown given a dropbox paper id and access token. 
+### Downloading a Dropbox paper
+The module uses [`dpb-download-md`](./dpb-download-md/index.js) node module to get a dropbox paper as markdown given a dropbox paper id and access token.
 
 As the official SDK didn't seem to have a straightforward way to get to a dropbox paper document content.
-  
-### Converting markdown dropbox paper to "linear" json 
+
+### Converting markdown dropbox paper to "linear" json
 
 The submodule [`md-to-json/linear.js`](./md-to-json/linear.js) takes the content of a markdown file as a string and converts it into an array of objects, representing markdown elements.
 
@@ -147,7 +146,7 @@ it's a flat data structure, with no nesting, hence why sometimes refered to as l
 
 ### Converting linear markdown json to nested json
 
-For some use cases it might be heplfull to nest all the elments between an h1 tag to the next h1 take as siblings/childres/elements of that tag. 
+For some use cases it might be heplfull to nest all the elments between an h1 tag to the next h1 take as siblings/childres/elements of that tag.
 
 Eg h1 tag could contain h2, p tag, link etc..
 
@@ -159,7 +158,7 @@ This is done in [`md-to-json/index.js`](./md-to-json/index.j)
 
 #### Example "nested json"
 
-```json 
+```json
 {
   "title": "TEST CMS",
   "elements": [
@@ -196,9 +195,9 @@ _Coding style convention ref optional, eg which linter to use_
 _Linting, github pre-push hook - optional_
 
 - node
-- npm 
+- npm
 - eslint see [`.eslintrc.json`](./.eslintrc.json)
- 
+
 
 ## Build
 
@@ -212,7 +211,7 @@ NA `?`
 
 _How to carry out tests_
 
-Minimal test coverage using [`jest`](https://facebook.github.io/jest/) for testing, to run tests: 
+Minimal test coverage using [`jest`](https://facebook.github.io/jest/) for testing, to run tests:
 
 ```
 npm test
@@ -222,27 +221,27 @@ npm test
 
 _How to deploy the code/app into test/staging/production_
 
-NA, it's a node module. 
+NA, it's a node module.
 
 
-## Contributing 
+## Contributing
 
-- Pull requests are welcome. 
+- Pull requests are welcome.
 - For questions, bugs, ideas feel free to raise a github issue.
 
 ---
 
-## Notes Dropbox "flavoured" markdown 
+## Notes Dropbox "flavoured" markdown
 
-Unforntunatelly, Dropbox paper has it's own flawour of markdown. Some of the most relevant and notable difference are: 
+Unforntunatelly, Dropbox paper has it's own flawour of markdown. Some of the most relevant and notable difference are:
 
 - Title of the doc and first `heading 1` element, are both marked has `h1` / `#`.
 - `Heading 3` is represented as bold `**` instead of `h3`/`###`.
-- There's no Heading 4, 5 or 6. 
+- There's no Heading 4, 5 or 6.
 
 ### Example of dropbox flavour markdown
 
-see [`md-to-json/examples/test.md`](./md-to-json/examples/test.md) as an example of dropbox flavour markdown file. 
+see [`md-to-json/examples/test.md`](./md-to-json/examples/test.md) as an example of dropbox flavour markdown file.
 
 ### Markdown elements not included in module
 
@@ -252,12 +251,12 @@ see [`md-to-json/examples/test.md`](./md-to-json/examples/test.md) as an example
 
 ### Markdown elements that could be included in module
 - [X] Parsing markdown github flavour tags for images eg `![alt text](link url)`. These appear on their own line.
-   - _NOTE_ luckily even when displayed on the same line in dropbox paper, the images are still represented on individual lines when exported as markdown. Which makes it easier to identify as separate from other elements and parse. 
+   - _NOTE_ luckily even when displayed on the same line in dropbox paper, the images are still represented on individual lines when exported as markdown. Which makes it easier to identify as separate from other elements and parse.
 
 - [ ]  Parsing markdown github flavour tags for links eg `[text](link url)` these generally appear as part of a paragraph, but could also appear in their own line, or as part of a heading etc..
 
-<!-- 
-Some research link 
+<!--
+Some research link
 
 - [Dropbox for JavaScript Developers](https://www.dropbox.com/developers/documentation/javascript#overview)
 - [Dropbox JavaScript SDK](http://dropbox.github.io/dropbox-sdk-js/index.html)
@@ -265,7 +264,7 @@ Some research link
 
 - [File request](https://www.dropbox.com/help/files-folders/received-file-request)
 
-- [dropbox-paper](https://www.npmjs.com/package/dropbox-paper#download-doc) 
+- [dropbox-paper](https://www.npmjs.com/package/dropbox-paper#download-doc)
 
 - [Markdown to JSON converter - python](https://github.com/njvack/markdown-to-json)
 - [`json2md`](https://github.com/IonicaBizau/json2md)

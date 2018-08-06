@@ -18,10 +18,13 @@ async function downloadDpbMd(accessToken, dbpDocId, cb) {
         'Dropbox-API-Arg': `{"doc_id": "${dbpDocId}","export_format": "markdown"}`
     };
 
-    const response = await fetch('https://api.dropboxapi.com/2/paper/docs/download', {
-        method: 'POST',
-        headers: headers
-    });
+    const response = await fetch(
+        'https://api.dropboxapi.com/2/paper/docs/download',
+        {
+            method: 'POST',
+            headers: headers
+        }
+    );
 
     if (response.ok) {
         return response.text();
