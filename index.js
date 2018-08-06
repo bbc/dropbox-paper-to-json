@@ -5,17 +5,18 @@ const mdToNestedJson = require('./md-to-json/index.js');
 const mdToJson = require('./md-to-json/linear.js');
 // pass your access token
 
-function dbpMdToJson(options) {
-    downloadDpbMd(options.accessToken, options.dbp_doc_id, (mdData) => {
-        var nested;
+async function dbpMdToJson(options) {
+    try {
+        const mdData = await downloadDpbMd(options.accessToken, options.dbp_doc_id);
+        let nested;
         // default for nested if undefined in options arguments to be true;
         if (options.nested === undefined) {
             nested = true;
         } else {
             nested = options.nested;
         }
-        
-        var jsonResult;
+
+        let jsonResult;
         if (nested) {
             // convert to nested json
             jsonResult = mdToNestedJson(mdData);
@@ -23,11 +24,10 @@ function dbpMdToJson(options) {
             // convert to linear json
             jsonResult = mdToJson(mdData);
         }
-        // return output json 
-        if (options.cb) {
-            options.cb(jsonResult);
-        }
-    });
+        return Promise.resolve(jsonResult);
+    } catch (e) {
+        return Promise.reject(new Error(e));
+    }
 }
 
 module.exports = dbpMdToJson;

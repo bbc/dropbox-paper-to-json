@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fetch = require('node-fetch');
 /**
  * Module to download Markdown file content from Dropbox Paper API
  * with access token and doc id
@@ -10,35 +11,27 @@ require('dotenv').config();
  * https://www.dropbox.com/developers/documentation/http/documentation#paper-docs-download
  *
  */
-const request = require('request');
 
-function downloadDpbMd(accessToken, dbpDocId, cb) {
-    var headers = {
+async function downloadDpbMd(accessToken, dbpDocId, cb) {
+    const headers = {
         Authorization: `Bearer ${accessToken}`,
         'Dropbox-API-Arg': `{"doc_id": "${dbpDocId}","export_format": "markdown"}`
     };
 
-    var options = {
-        url: 'https://api.dropboxapi.com/2/paper/docs/download',
-        method: 'POST',
-        headers: headers
-    };
-
-    function responseCallback(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            if (cb) {
-                // return content of markdown through callback
-                cb(body);
-            }
-        } else {
-            console.error(
-                'There was an error calling with the Dropbox Paper API response',
-                error
-            );
+    const response = await fetch(
+        'https://api.dropboxapi.com/2/paper/docs/download',
+        {
+            method: 'POST',
+            headers: headers
         }
+    );
+
+    if (response.ok) {
+        return response.text();
     }
-    // initializing the request to the API
-    request(options, responseCallback);
+    return Promise.reject(
+        new Error(`Dropbox Paper API returned wrong status code: ${response.status}`)
+    );
 }
 
 module.exports = downloadDpbMd;
