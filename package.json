@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "node index.js"
   },
-  "author": "Pietro Passarelli © BBC 2018",
+  "author": "Pietro Passarelli CC0 BBC 2018",
   "contributors": [
     "Alvin"
   ],
